@@ -1,24 +1,29 @@
 # Rack::Process
 
-TODO: Write a gem description
+Proxy to a rack application in a separate process.
 
-## Installation
-
-Add this line to your application's Gemfile:
-
-    gem 'rack-process'
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install rack-process
+[An issue](https://github.com/37signals/pow/issues/136) filed for pow piqued my curiosity. After itching, this is what I came up with.
 
 ## Usage
 
-TODO: Write usage instructions here
+You can't run multiple rails applications in the same process. Instead, we can load those applications in separate processes and compose them using Rack.
+
+Here's a simple example `config.ru` which does just that:
+
+```ruby
+require 'rack'
+require 'rack-process'
+
+run Rack::URLMap.new \
+  "/first" => Rack::Process.new('/path/to/rails-app-1'),
+  "/second" => Rack::Process.new('/path/to/rails-app2')
+```
+
+## Thanks
+
+ * @josh's excellent [nack](https://github.com/josh/nack) used by [pow](https://github.com/37signals/pow).
+ * @tpope for [Ruby IO Mixins](http://git.tpope.net/ruby-io-mixins.git).
+ * Daniel J. Bernstein for [netstrings](http://cr.yp.to/proto/netstrings.txt), and @josh for nack's implementation.
 
 ## Contributing
 
