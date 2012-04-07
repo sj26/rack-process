@@ -1,5 +1,5 @@
 module Rack
   class Process
-    VERSION = "0.0.1"
+    VERSION = "0.0.2"
   end
 end
