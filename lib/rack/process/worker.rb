@@ -77,6 +77,7 @@ class Rack::Process
         write "output"
         write piece
       end
+      body.close if body.respond_to? :close
       write "done"
     rescue SystemExit, Errno::EINTR
       # Ignore
