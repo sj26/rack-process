@@ -1,0 +1,7 @@
+#!/usr/env/bin ruby
+
+$:.unshift File.expand_path '../../lib', __FILE__
+
+require 'rack-process'
+
+Rack::Process::Worker.run *ARGV
